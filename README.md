@@ -1,4 +1,4 @@
-# Custom labwc workspace modules for waybar
+# Custom waybar workspaces module for labwc
 
 
 
