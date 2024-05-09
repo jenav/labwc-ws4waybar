@@ -1,7 +1,9 @@
 # Custom labwc workspace modules for waybar
 
 
-https://github.com/jenav/labwc-ws4waybar/assets/13712031/2b8f8582-66db-445e-b8ac-882a5629f532
+
+https://github.com/jenav/labwc-ws4waybar/assets/13712031/951acaa8-b801-4b58-b30a-c02cc428a355
+
 
 
 It's a dirty little hack but it gets the job done. For it to work we need to compile labwc from source since we are adding 4 lines of code to get what we need (minus comments). It works as an indicator and as a swicher; we can either click each workspace number/indicator or use the mouse wheel.
