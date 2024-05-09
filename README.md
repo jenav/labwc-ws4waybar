@@ -1,19 +1,23 @@
 # Custom labwc workspace modules for waybar
 
-It's a dirty little hack but it gets the job done. For it to work you need to compile labwc from source since we are adding 4 lines of code to get what we need (minus comments). It works as an indicator and as a swicher; you can either click each workspace number/indicator or use the mouse wheel.
+
+https://github.com/jenav/labwc-ws4waybar/assets/13712031/2b8f8582-66db-445e-b8ac-882a5629f532
+
+
+It's a dirty little hack but it gets the job done. For it to work we need to compile labwc from source since we are adding 4 lines of code to get what we need (minus comments). It works as an indicator and as a swicher; we can either click each workspace number/indicator or use the mouse wheel.
 
 ### What you need installed?
 
 - [wtype](https://github.com/atx/wtype): it provides the 'switcher' functionality part
-- [inotify-tools](https://github.com/inotify-tools/inotify-tools): owr watcher [installation](https://github.com/inotify-tools/inotify-tools/wiki)
+- [inotify-tools](https://github.com/inotify-tools/inotify-tools): owr watcher ([installation](https://github.com/inotify-tools/inotify-tools/wiki))
 
 ### How it works?
 
-We modify labwc to make it write the current workspace name to a file in /tmp (/tmp is mounted in RAM). We do so in the only place where labwc makes the actualworkspace switch no matter the action taken by the user/environment. So it's simple and effective.
+We modify labwc to make it write the current workspace name to a file in /tmp (/tmp is mounted in RAM). We do so in the only place where labwc makes the actual workspace switch no matter the action taken by the user/environment. So it's simple and effective.
 
 Then we just run a 'server' shell script that watches the aforementioned file for changes and reacts by letting the different waybar workspace modules (custom, one per workspace) know if they are the active one or not, so they can adjust accordingly, e.g., by changing it's appearance.
 
-The actual workspace modules that we put in the bar are all one same shell script that receives its workspace number as a parameter when you define it in the waybar's 'config' file.
+The workspace modules that we put in the bar are all one same shell script that receives its workspace number as a parameter when you define it in the waybar's 'config' file.
 
 The communication between the 'server' and the 'modules' is done through named pipes (FIFO).
 
