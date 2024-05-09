@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# Desktop names
+# They must match their name in the 'labwc/rc.xml' file
+names=("Escritorio 1" "Escritorio 2" "Escritorio 3" "Escritorio 4")
+
+SYMBOLS=(➊ ➋ ➌ ➍)
+
+MAX_WS=${#names[@]}
+curr=1
+
+FILE="/tmp/labwc.current-ws"
+
+if [ ! -f "${FILE}" ]; then
+	touch "${FILE}"
+fi
+
+# labwc always starts in the first workspace
+# If you restart waybar while in another workspace this won't work, but who does that?
+echo "{\"text\": \"${SYMBOLS[0]}\"}"
+
+while inotifywait -qqe close_write "${FILE}"; do 	# the -qq switches are a must
+	mapfile -t < "${FILE}"							# map file to array (you can just cat the file)
+
+	for ((i=0; i<$MAX_WS; i++)); do
+		if [ "${MAPFILE[0]}" = "${names[i]}" ]; then
+			echo "{\"text\": \"${SYMBOLS[i]}\"}"
+			break
+		fi
+	done
+done

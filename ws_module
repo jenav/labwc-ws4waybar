@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+WHO=$1	# workspace number
+
+# The first one starts the 'server'
+if [ "${WHO}" -eq "1" ]; then
+	~/.config/waybar/scripts/ws_labwc &
+fi
+
+# Tradicional
+# SYMBOLS=(➊ ➋ ➌ ➍)
+SYMBOLS=(1 2 3 4)
+#SYMBOLS2=("◯" "⬤")	# Fancyer
+CLASSES=("inactive" "active")
+
+FIFO="/tmp/waybar.ws${WHO}-module"
+
+if [ ! -p "${FIFO}" ]; then
+	mkfifo "${FIFO}"
+fi
+
+# Initial state
+if [ "${WHO}" -eq "1" ]; then
+	echo "{\"text\": \"${SYMBOLS[((WHO-1))]}\", \"class\": \"${CLASSES[1]}\"}"
+	# echo "{\"text\": \"${SYMBOLS2[1]}\", \"class\": \"${CLASSES[1]}\"}"	# Fancyer
+else
+	echo "{\"text\": \"${SYMBOLS[((WHO-1))]}\", \"class\": \"${CLASSES[0]}\"}"
+	# echo "{\"text\": \"${SYMBOLS2[0]}\", \"class\": \"${CLASSES[0]}\"}"	# Fancyer
+fi
+
+while read line <$FIFO; do
+	echo "{\"text\": \"${SYMBOLS[((WHO-1))]}\", \"class\": \"${CLASSES[$line]}\"}"
+	# echo "{\"text\": \"${SYMBOLS2[$line]}\", \"class\": \"${CLASSES[$line]}\"}"	# Fancyer
+done

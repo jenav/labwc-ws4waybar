@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# Desktop names
+# They must match their name in the 'labwc/rc.xml' file
+names=("Escritorio 1" "Escritorio 2" "Escritorio 3" "Escritorio 4")
+
+MAX_WS=${#names[@]}
+curr=1
+
+FILE="/tmp/labwc.current-ws"
+
+if [ ! -f "${FILE}" ]; then
+	touch "${FILE}"
+fi
+
+while inotifywait -qqe close_write "${FILE}"; do		# the -qq switches are a must
+	mapfile -t < "${FILE}"								# map file to array (you can just cat the file)
+
+	for ((i=1; i<=$MAX_WS; i++)); do
+		if [ "${MAPFILE[0]}" = "${names[((i-1))]}" ]; then
+			echo "1" > "/tmp/waybar.ws${i}-module"
+		else
+			echo "0" > "/tmp/waybar.ws${i}-module"
+		fi
+	done
+done
