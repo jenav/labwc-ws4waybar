@@ -39,7 +39,7 @@ Use this module in waybar if you want a unique module displaying the current act
 
 ### What to do?
 
-- Modify the function `workspaces_switch_to()` in src/workspaces.c applying the patch `0000-expose-current-workspace.patch` or editing the file by hand. Compile and install.
+1. Modify the function `workspaces_switch_to()` in src/workspaces.c applying the patch `0000-expose-current-workspace.patch` or editing the file by hand. Compile and install.
 
 	<details>
 		<summary>Detailed information</summary>
@@ -104,7 +104,7 @@ Use this module in waybar if you want a unique module displaying the current act
 		
 	</details>
 
-- Download, **review** and copy the 3 shell scripts `ws_labwc` (server), `ws_module` and `ws_unique` to the `~/.config/waybar/scripts/` folder. Create the folder if it doesn't exist or adjust the paths to your liking. Make sure the scripts are executable.
+2. Download, **review** and copy the 3 shell scripts `ws_labwc` (server), `ws_module` and `ws_unique` to the `~/.config/waybar/scripts/` folder. Create the folder if it doesn't exist or adjust the paths to your liking. Make sure the scripts are executable.
 	<details>
 		<summary>Detailed information</summary>
 		
@@ -119,9 +119,29 @@ Use this module in waybar if you want a unique module displaying the current act
 
 	</details>
 
-- Modify the workspaces names in the scripts `ws_labwc` and `ws_unique` to match the names defined in your labwc `rc.xml` config file (usually in `~/.config/labwc/rc.xml`).
+3. Modify the workspaces names in the scripts `ws_labwc` and `ws_unique` to match the names defined in your labwc `rc.xml` config file (usually in `~/.config/labwc/rc.xml`).
 
-- Add the custom modules to your waybar config. One per workspace. **Adjust the wtype commands to match your labwc keymaps as defined in your labwc/rc.xml file**
+	<details>
+		<summary>Example config in ~/.config/labwc/rc.xml</summary>
+		
+		```xml
+  		<!-- ... -->
+		<desktops>
+	 		<popupTime>1000</popupTime>
+			<names>
+	        		<name>Escritorio 1</name>
+	        		<name>Escritorio 2</name>
+	        		<name>Escritorio 3</name>
+	        		<name>Escritorio 4</name>
+			</names>
+		</desktops>
+		<!-- ... -->
+		```
+  
+	</details>
+
+4. Add the custom modules to your waybar config file (usually in `~/.config/waybar/config`). One per workspace. See my snipet below.
+  **Adjust the wtype commands to match your labwc keymaps as defined in your labwc/rc.xml file**
 
 I provide my snipets as an example:
 
