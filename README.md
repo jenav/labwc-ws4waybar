@@ -98,8 +98,9 @@ The communication between the 'server' and the 'modules' is done through named p
 
 I provide my snipets as an example:
 
-> file: ~/.config/waybar/config
-
+<details>
+<summary>file: ~/.config/waybar/config</summary>
+	
 ```jsonc
 {
   //...
@@ -161,8 +162,10 @@ I provide my snipets as an example:
   },
 }
 ```
+</details>
 
-> file: ~/.config/waybar/style.css
+<details>
+<summary>file: ~/.config/waybar/style.css</summary>
 
 ```css
 /* ... */
@@ -194,3 +197,4 @@ I provide my snipets as an example:
 }
 /* ... */
 ```
+</details>
