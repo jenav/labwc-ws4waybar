@@ -91,6 +91,19 @@ The communication between the 'server' and the 'modules' is done through named p
 	</details>
 
 - Download, **review** and copy the 3 shell scripts `ws_labwc` (server), `ws_module` and `ws_unique` to the `~/.config/waybar/scripts/` folder. Create the folder if it doesn't exist or adjust the paths to your liking. Make sure the scripts are executable.
+	<details>
+		<summary>Detailed information</summary>
+		
+		Clone the repo:
+		$ git clone https://github.com/jenav/labwc-ws4waybar.git
+
+		Create the scripts folder:
+		$ mkdir ~/.config/waybar/scripts
+	
+		Copy the scripts to the destination:
+		$ cp labwc-ws4waybar/ws_* ~/.config/waybar/scripts/
+
+	</details>
 
 - Adjust the workspaces names in `ws_labwc` and `ws_unique` to match their names as defined in the labwc `rc.xml` config file.
 
