@@ -27,6 +27,69 @@ The communication between the 'server' and the 'modules' is done through named p
 
 - Modify the function `workspaces_switch_to()` in src/workspaces.c applying the patch `0000-expose-current-workspace.patch` or editing the file by hand.
 
+	<details>
+		<summary>Detailed information</summary>
+		
+		### General considerations
+			
+		I'll be using the release branch 0.7.4 of labwc as an example to avoid all kind of things that could go wrong.
+		You can use a tty (alt+ctrl+F2...12) to run the steps or do it from another WM/DE.
+	
+		### Steps
+		
+		1 - Make sure you don't have labwc already installed via your package manager. If it is, uninstall it first.
+		2 - Clone the labwc repo and switch to a release branch.
+		
+			$ git clone https://github.com/labwc/labwc
+			$ cd labwc
+			$ git checkout 0.7.4
+		
+		3 - Install the necessary dependencies for compilation and runtime (but don't compile it yet).
+		
+		Be aware of distro specific shenanigans. For example, in Arch, one must install wlroots version 0.17 which is called 'wlroots0.17' and make sure you have only one version installed.
+		
+		Follow labwc's wiki for dependencies: https://github.com/labwc/labwc/wiki
+		
+		Aditional dependencies for us:
+		- wtype: it provides the 'switcher' functionality part (https://github.com/atx/wtype)
+		- inotify-tools: watching file's changes capability (https://github.com/inotify-tools/inotify-tools/wiki)
+		
+		4 - Modify the source code.
+		
+		Apply the patch '0000-expose-current-workspace.patch' from my repo or...
+		Go into the 'src' directory in the labwc folder you just cloned.
+		Edit the file named 'workspaces.c' with your favorite editor adding this lines from line 284 (this is specific to branch 0.7.4), inside the funcion 'void workspaces_switch_to(...)':
+		
+		    /* HACK */
+		    FILE *fptr;
+		    fptr = fopen("/tmp/labwc.current-ws", "w");
+		    fputs(target->name, fptr);
+		    fclose(fptr);
+		    /*******/
+		
+		    ![20240807_09h20m33s_grim](https://github.com/user-attachments/assets/7d55731f-365a-4506-86f8-ea34c3360a47)
+		
+		
+		Save the file and exit.
+		
+		5 - Compilation.
+		
+		On Arch, run this before compilation so it can find the wlroots libraries:
+			$ export PKG_CONFIG_PATH='/usr/lib/wlroots0.17/pkgconfig'
+		
+		Compile:
+			(standing in the labwc/ folder)
+			$ meson build
+			$ ninja -C build
+		
+		6 - Installation.
+			$ meson install -C build
+		
+		By default it installs the labwc binary in the /usr/local/bin folder, make you have it in the PATH environment variable.
+		You should be able to run the modified 'labwc' from anywhere now.
+		
+	</details>
+
 - Download, **review** and copy the 3 shell scripts `ws_labwc` (server), `ws_module` and `ws_unique` to the `~/.config/waybar/scripts/` folder. Create the folder if it doesn't exist or adjust the paths to your liking. Make sure the scripts are executable.
 
 - Adjust the workspaces names in `ws_labwc` and `ws_unique` to match their names as defined in the labwc `rc.xml` config file.
