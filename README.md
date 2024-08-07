@@ -23,9 +23,23 @@ The workspace modules that we put in the bar are all one same shell script that 
 
 The communication between the 'server' and the 'modules' is done through named pipes (FIFO).
 
+### The scripts
+
+#### wc_labwc
+
+This is the 'server' shell script that watches for changes in the file labwc writes to anytime there's a change of workspace (our hack) and proceed to send a message to each of our modules notifying them if they are the active one or not.
+
+#### wc_module
+
+Our actual modules for waybar. We instantiate as many of this script as workspaces we want. Each of them will read their state (active/inactive) from a different pipe.
+
+#### wc_unique
+
+Use this module in waybar if you want a unique module displaying the current active workspace number for example (second half of the video). When using this module you don't need to use the previous two, since it acts both as a 'server' (watcher) and 'client' (setter).
+
 ### What to do?
 
-- Modify the function `workspaces_switch_to()` in src/workspaces.c applying the patch `0000-expose-current-workspace.patch` or editing the file by hand.
+- Modify the function `workspaces_switch_to()` in src/workspaces.c applying the patch `0000-expose-current-workspace.patch` or editing the file by hand. Compile and install.
 
 	<details>
 		<summary>Detailed information</summary>
@@ -105,9 +119,9 @@ The communication between the 'server' and the 'modules' is done through named p
 
 	</details>
 
-- Adjust the workspaces names in `ws_labwc` and `ws_unique` to match their names as defined in the labwc `rc.xml` config file.
+- Modify the workspaces names in the scripts `ws_labwc` and `ws_unique` to match the names defined in your labwc `rc.xml` config file (usually in `~/.config/labwc/rc.xml`).
 
-- Add the custom modules to your waybar config. One per workspace. **ADJUST wtype commands to match YOUR labwc KEYMAPS!**
+- Add the custom modules to your waybar config. One per workspace. **Adjust the wtype commands to match your labwc keymaps as defined in your labwc/rc.xml file**
 
 I provide my snipets as an example:
 
