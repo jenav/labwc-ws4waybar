@@ -11,7 +11,7 @@ It's a dirty little hack but it gets the job done. For it to work we need to com
 ### What you need installed?
 
 - [wtype](https://github.com/atx/wtype): it provides the 'switcher' functionality part
-- [inotify-tools](https://github.com/inotify-tools/inotify-tools): owr watcher ([installation](https://github.com/inotify-tools/inotify-tools/wiki))
+- [inotify-tools](https://github.com/inotify-tools/inotify-tools): our watcher ([installation](https://github.com/inotify-tools/inotify-tools/wiki))
 
 ### How it works?
 
