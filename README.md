@@ -13,7 +13,7 @@ It's a dirty little hack but it gets the job done. For it to work we need to com
 - [wtype](https://github.com/atx/wtype): it provides the 'switcher' functionality part
 - [inotify-tools](https://github.com/inotify-tools/inotify-tools): our watcher ([installation](https://github.com/inotify-tools/inotify-tools/wiki))
 
-### How it works?
+### How does it work?
 
 We modify labwc to make it write the current workspace name to a file in /tmp (/tmp is mounted in RAM). We do so in the only place where labwc makes the actual workspace switch no matter the action taken by the user/environment. So it's simple and effective.
 
