@@ -109,10 +109,11 @@ Use this module in waybar if you want a unique module displaying the current act
 		6 - Installation.
 			$ meson install -C build
 		
-		By default the labwc binary is installed in the /usr/local/bin folder, so make sure you have it in your PATH
-		environment variable:
+		By default the labwc binary is installed in the /usr/local/bin folder, so make sure you have the path in your PATH
+		environment variable, for example:
 
 			$ echo $PATH
+   			/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
 
 		If it's missing you need to add this line at the end of your ~/.bashrc file (in case you use bash):
 
