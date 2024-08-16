@@ -60,7 +60,8 @@ Use this module in waybar if you want a unique module displaying the current act
 		
 		3 - Install the necessary dependencies for compilation and runtime (but don't compile it yet).
 		
-		Be aware of distro specific shenanigans. For example, in Arch, one must install wlroots version 0.17 which is called 'wlroots0.17' and make sure you have only one version installed.
+		Be aware of distro specific shenanigans. For example, in Arch, one must install wlroots version 0.17 which is called
+		'wlroots0.17' and make sure you have only one version installed.
 		
 		Follow labwc's wiki for dependencies: https://github.com/labwc/labwc/wiki
 		
@@ -72,7 +73,8 @@ Use this module in waybar if you want a unique module displaying the current act
 		
 		Apply the patch '0000-expose-current-workspace.patch' from my repo or...
 		Go into the 'src' directory in the labwc folder you just cloned.
-		Edit the file named 'workspaces.c' with your favorite editor adding this lines from line 284 (this is specific to branch 0.7.4), inside the funcion 'void workspaces_switch_to(...)':
+		Edit the file named 'workspaces.c' with your favorite editor adding this lines from line 284 (this is specific to
+		branch 0.7.4), inside the funcion 'void workspaces_switch_to(...)':
 		
 		    /* HACK */
 		    FILE *fptr;
@@ -99,12 +101,20 @@ Use this module in waybar if you want a unique module displaying the current act
 		6 - Installation.
 			$ meson install -C build
 		
-		By default it installs the labwc binary in the /usr/local/bin folder, make you have it in the PATH environment variable.
+		By default the labwc binary is installed in the /usr/local/bin folder, so make sure you have it in your PATH
+		environment variable:
+
+			$ echo $PATH
+
+		If it's missing you need to add this line at the end of your ~/.bashrc file (in case you use bash):
+
+   			export PATH=$PATH:/usr/local/bin
+   
 		You should be able to run the modified 'labwc' from anywhere now.
 		
 	</details>
 
-2. Download, **review** and copy the 3 shell scripts `ws_labwc` (server), `ws_module` and `ws_unique` to the `~/.config/waybar/scripts/` folder. Create the folder if it doesn't exist or adjust the paths to your liking. Make sure the scripts are executable.
+3. Download, **review** and copy the 3 shell scripts `ws_labwc` (server), `ws_module` and `ws_unique` to the `~/.config/waybar/scripts/` folder. Create the folder if it doesn't exist or adjust the paths to your liking. Make sure the scripts are executable.
 	<details>
 		<summary>Detailed information</summary>
 		
@@ -119,7 +129,7 @@ Use this module in waybar if you want a unique module displaying the current act
 
 	</details>
 
-3. Modify the workspaces names in the scripts `ws_labwc` and `ws_unique` to match the names defined in your labwc `rc.xml` config file (usually in `~/.config/labwc/rc.xml`).
+4. Modify the workspaces names in the scripts `ws_labwc` and `ws_unique` to match the names defined in your labwc `rc.xml` config file (usually in `~/.config/labwc/rc.xml`).
 
 	<details>
 		<summary>Example config in ~/.config/labwc/rc.xml</summary>
@@ -140,7 +150,7 @@ Use this module in waybar if you want a unique module displaying the current act
   
 	</details>
 
-4. Add the custom modules to your waybar config file (usually in `~/.config/waybar/config`). One per workspace. See my snipet below.
+5. Add the custom modules to your waybar config file (usually in `~/.config/waybar/config`). One per workspace. See my snipet below.
   **Adjust the wtype commands to match your labwc keymaps as defined in your labwc/rc.xml file**
 
 I provide my snipets as an example:
