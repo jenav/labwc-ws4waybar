@@ -71,7 +71,15 @@ Use this module in waybar if you want a unique module displaying the current act
 		
 		4 - Modify the source code.
 		
-		Apply the patch '0000-expose-current-workspace.patch' from my repo or...
+		You can either apply the patch '0000-expose-current-workspace.patch' from my repo:
+
+		Copy the file 0000-expose-current-workspace.patch from my repo to the base folder of the labwc source code and
+		apply the patch like this:
+
+			$ patch -p 1 < 0000-expose-current-workspace.patch
+
+		Or edit manually:
+
 		Go into the 'src' directory in the labwc folder you just cloned.
 		Edit the file named 'workspaces.c' with your favorite editor adding this lines from line 284 (this is specific to
 		branch 0.7.4), inside the funcion 'void workspaces_switch_to(...)':
